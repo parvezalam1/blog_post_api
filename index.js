@@ -1,8 +1,11 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-const app=express();
-const PORT=5000;
+import dotenv from 'dotenv'
+
+dotenv.config()
+const app = express();
+const PORT =process.env.PORT || 3200;
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors())
@@ -12,6 +15,9 @@ import postsRouter from './routers/posts.js';
 
 import ImageKit from 'imagekit';
 
+
+
+
 const imagekit = new ImageKit({
   urlEndpoint: 'https://ik.imagekit.io/c9ufptlb9',
   publicKey: 'public_7RFZgYOyot8n5BfxVPlwgnV/kws=',
@@ -19,17 +25,17 @@ const imagekit = new ImageKit({
 });
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-  
-  
-  app.get('/auth', function (req, res) {
-    var result = imagekit.getAuthenticationParameters();
-    res.send(result);
-  });
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
+app.get('/auth', function (req, res) {
+  var result = imagekit.getAuthenticationParameters();
+  res.send(result);
+});
 
 // const storage=multer.diskStorage({
 //     destination:function(req,file,cb){
@@ -47,10 +53,10 @@ app.use(function (req, res, next) {
 //     res.status(200).json(file)
 // })
 
-app.use('/api/auth',authRouter);
-app.use('/api/posts',postsRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/posts', postsRouter);
 
 
-app.listen(PORT,()=>{
-    console.log(`server is running on port number: ${PORT}`)
+app.listen(PORT, () => {
+  console.log(`server is running on port number: ${PORT}`)
 })
