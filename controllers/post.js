@@ -21,7 +21,7 @@ export const getPost = (req, res) => {
 
 
 export const addPost = async (req, res) => {
-    const q = "insert into posts (`title`,`description`,`postImage`,Date,`uid`,`cat`) values (?)";
+    const q = "insert into posts (`title`,`description`,`postImage`,`Date`,`uid`,`cat`) values (?)";
     let values = [
         req.body.title,
         req.body.description,
