@@ -9,10 +9,10 @@ export const Register = (req, res) => {
         if (data.length) {
             return res.status(201).json("Username or Email already exist!")
         } else {
-            let insertNewUser = "insert into users (username,email,password,avatar) values (?)";
+            let insertNewUser = "insert into users (username,email,password) values (?)";
             var salt = bcrypt.genSaltSync(10);
             var password = bcrypt.hashSync(req.body.password, salt);
-            let values = [req.body.username,req.body.email,password,req.body.avatar]
+            let values = [req.body.username,req.body.email,password]
             conn.query(insertNewUser, [values], (err, data) => {
                 if (err) return res.status(209).json(err);
                 res.status(200).json("User has been created successfully!");
