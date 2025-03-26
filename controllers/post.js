@@ -26,7 +26,7 @@ export const addPost = async (req, res) => {
         req.body.title,
         req.body.description,
         req.body.postImage,
-        Date.now(),
+        req.body.Date,
         req.body.uid,
         req.body.cat
     ]
