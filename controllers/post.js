@@ -41,7 +41,7 @@ export const deletePost = (req, res) => {
         if (err) return res.status(403).json('token is not valid!')
 
         let q = "delete from posts where uid=? and pid=?"
-        conn.query(q, [userInfo.uid, req.params.postId], (err, data) => {
+        conn.query(q, [userInfo.id, req.params.postId], (err, data) => {
             if (err) return res.status(401).json('You can delete only your post!')
             if (data) return res.status(200).json("User post has been deleted!")
             res.status(201).json('Something went wrong!')
