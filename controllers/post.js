@@ -10,7 +10,7 @@ export const getPosts = (req, res) => {
 }
 
 export const getPost = (req, res) => {
-    let q = "select username,title,description,postImage,cat,postDate,pid from users u join posts p on u.id=p.uid where p.pid=?"
+    let q = "select username,title,description,postImage,cat,postDate,pid from users u join posts p on u.id=p.uid where pid=?"
     conn.query(q, [req.params.pid], (err, data) => {
         if (err) return res.status(404).json(err)
         res.status(200).json(data[0])
