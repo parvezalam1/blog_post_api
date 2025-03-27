@@ -11,7 +11,7 @@ export const getPosts = (req, res) => {
 }
 
 export const getPost = (req, res) => {
-    let q = "select username,avatar,title,description,postImage,Date,cat,pid from users u join posts p on u.uid=p.uid where pid=?"
+    let q = "select username,avatar,title,description,postImage,postDate,cat,pid from users u join posts p on u.uid=p.uid where pid=?"
     conn.query(q, [req.params.pid], (err, data) => {
         if (err) return res.status(404).json(err)
         res.status(200).json(data[0])
@@ -52,7 +52,7 @@ export const deletePost = (req, res) => {
 
 
 export const updatePost=async(req,res)=>{
-    let q="update posts set title=?,description=?,postImage=?,Date=?,uid=?,cat=? where pid=?";
+    let q="update posts set title=?,description=?,postImage=?,postDate=?,uid=?,cat=? where pid=?";
     let values=[
         req.body.title,
         req.body.description,
@@ -66,3 +66,6 @@ export const updatePost=async(req,res)=>{
         res.status(200).json('User post has been updated!')
     })
 }
+
+
+// INSERT INTO posts (title,description,postImage,postDate,uid,cat) VALUES ('ii','sd','sdf.jpg','2025/02/22','0','food')
